@@ -1,1 +1,13 @@
 # W205_exercise2
+
+This application will require a couple of quick setup steps. The environment should already have storm setup with a python version that has tweepy and psycopg2 packages installed, along with Postgres.
+
+First execute delete_tweet_table.py. This script will ensure that the table tweetwordcount is completely clean.
+Second execute create_tweet_table.py. This script will create tweetwordcount with the correct schema.
+
+Once the above two scripts are executed change your directory to tweetwordcount and execute sparse run. This will start the streaming application. Once enough information is collected do a keyboard interrupt to stop the application.
+
+The finalresults.py and histogram.py are two scripts that will query the table for data. 
+  - finalresults.py will fetch the count of a word, i.e. python finalresults.py hello
+  - finalresults.py executed alone will print out the full table
+  - histogram.py will fetch the count of a word between two numbers provided, i.e. python histogram.py 2 4
