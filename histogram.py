@@ -1,17 +1,17 @@
 import sys
 import psycopg2
 
-conn = psycopg2.connect(database="Tcount", user="postgres", password="pass", host="localhost", port="5432")
+conn = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 
 def lookup_postgres(count1, count2):
 	cur = conn.cursor()
-	cur.execute("SELECT word, count from Tweetwordcount where count between %d and %d", % (count1, count2))
+	cur.execute("SELECT word, count from Tweetwordcount where count between %s and %s order by count", % (count1, count2))
 	records = cur.fetchall()
-	if records is not None:
+	if cur.rowcount != 0:
 		for rec in records:
 	   		print '"%s": %d' % (rec[0], rec[1]), '\n'
 	else:
-		print 'No words with occurences between %d and %d', % (count1, count2)
+		print 'No words with occurences between %s and %s', % (count1, count2)
 	conn.commit()
 	conn.close()
 

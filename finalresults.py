@@ -1,15 +1,14 @@
 import sys
 import psycopg2
 
-conn = psycopg2.connect(database="Tcount", user="postgres", password="pass", host="localhost", port="5432")
+conn = psycopg2.connect(database="tcount", user="postgres", password="pass", host="localhost", port="5432")
 
 def lookup_postgres(word):
 	cur = conn.cursor()
-	cur.execute("SELECT word, count from Tweetwordcount where word =%s", %word)
-	records = cur.fetchall()
-	if records is not None:
-		for rec in records:
-	   		print 'Total number of occurences of "%s": %d' % (rec[0], rec[1])
+	cur.execute("""SELECT word, count from Tweetwordcount where word =%s;""", (word,))
+	records = cur.fetchone()
+	if cur.rowcount != 0:
+		print 'Total number of occurences of "%s": %d' % (records[0], records[1])
 	else:
 		print 'Total number of occurences of "%s": 0' % word
 	conn.commit()
