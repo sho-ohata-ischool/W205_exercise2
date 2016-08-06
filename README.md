@@ -11,3 +11,5 @@ The finalresults.py and histogram.py are two scripts that will query the table f
   - finalresults.py will fetch the count of a word, i.e. python finalresults.py hello
   - finalresults.py executed alone will print out the full table
   - histogram.py will fetch the count of a word between two numbers provided, i.e. python histogram.py 2 4
+
+**Note that this app will not work if you close a storm session and restart a new one.**
